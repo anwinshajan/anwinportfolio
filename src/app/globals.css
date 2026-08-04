@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ===== Design Tokens ===== */
+@theme {
+  --color-dark: #0a0a0a;
+  --color-cream: #f5f0eb;
+  --color-accent: #b8940e;
+  --font-serif: "Fraunces", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+/* ===== Grain Overlay ===== */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ===== Scroll Fade Animation ===== */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Section Spacing ===== */
+.section-padding {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 8rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 10rem 2rem;
+  }
+}
+
+/* ===== Section Heading ===== */
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-cream) 40%, transparent);
+}
+
+/* ===== Blog Post Prose ===== */
+.prose-custom p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--color-cream) 70%, transparent);
+}
+
+.prose-custom strong {
+  color: color-mix(in srgb, var(--color-cream) 90%, transparent);
+  font-weight: 500;
+}
+
+.prose-custom h2,
+.prose-custom h3 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  color: var(--color-cream);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-custom h2 {
+  font-size: 1.5rem;
+}
+
+.prose-custom h3 {
+  font-size: 1.25rem;
+}
+
+.prose-custom a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s;
+}
+
+.prose-custom a:hover {
+  opacity: 0.8;
+}
+
+.prose-custom ul,
+.prose-custom ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: color-mix(in srgb, var(--color-cream) 60%, transparent);
+}
+
+.prose-custom li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.prose-custom blockquote {
+  border-left: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: color-mix(in srgb, var(--color-cream) 50%, transparent);
+}

@@ -2,9 +2,12 @@
 
 /* ===== Design Tokens ===== */
 @theme {
-  --color-dark: #0a0a0a;
-  --color-cream: #f5f0eb;
-  --color-accent: #b8940e;
+  --color-dark: #0b0c10;
+  --color-dark-card: #12141d;
+  --color-cream: #f8fafc;
+  --color-slate-muted: #94a3b8;
+  --color-gold: #d4af37;
+  --color-gold-light: #fef3c7;
   --font-serif: "Fraunces", serif;
   --font-sans: "Inter", sans-serif;
 }
@@ -20,11 +23,66 @@ body {
   background-color: var(--color-dark);
   color: var(--color-cream);
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-dark);
+  background-color: var(--color-gold);
+  color: #0b0c10;
+}
+
+/* ===== Soft Premium Ambient Lighting ===== */
+.bg-glow-gold-subtle {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%);
+}
+
+/* ===== Premium Glass Cards ===== */
+.glass-card-premium {
+  background: rgba(18, 20, 29, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-premium:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(212, 175, 55, 0.1);
+}
+
+/* ===== Premium Buttons ===== */
+.btn-premium-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #b49330 100%);
+  color: #0b0c10;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #fef3c7 0%, #d4af37 100%);
+}
+
+.btn-premium-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  color: #f8fafc;
+  font-weight: 500;
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium-outline:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.08);
+  color: #fef3c7;
 }
 
 /* ===== Grain Overlay ===== */
@@ -33,10 +91,17 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
+}
+
+/* ===== Text Gradients ===== */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 40%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ===== Scroll Fade Animation ===== */
@@ -72,22 +137,22 @@ body {
 /* ===== Section Heading ===== */
 .section-heading {
   font-family: var(--font-serif);
-  font-size: 0.75rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-cream) 40%, transparent);
+  color: #d4af37;
 }
 
 /* ===== Blog Post Prose ===== */
 .prose-custom p {
   margin-bottom: 1.5rem;
   line-height: 1.8;
-  color: color-mix(in srgb, var(--color-cream) 70%, transparent);
+  color: #cbd5e1;
 }
 
 .prose-custom strong {
-  color: color-mix(in srgb, var(--color-cream) 90%, transparent);
+  color: #f8fafc;
   font-weight: 500;
 }
 

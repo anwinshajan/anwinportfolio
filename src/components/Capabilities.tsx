@@ -30,23 +30,28 @@ const capabilities = [
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="section-padding">
-      <div className="mx-auto max-w-5xl">
+    <section id="capabilities" className="section-padding relative overflow-hidden">
+      <div className="mx-auto max-w-5xl relative z-10">
         <ScrollFade>
-          <h2 className="section-heading">Capabilities</h2>
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="section-heading">04. Capabilities</h2>
+            <div className="h-px flex-1 bg-gradient-to-r from-[#d4af37]/30 via-[#d4af37]/10 to-transparent" />
+          </div>
         </ScrollFade>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-cream/8 bg-cream/5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {capabilities.map((cap, i) => (
             <ScrollFade key={cap.title} delay={i * 80}>
-              <div className="group flex h-full flex-col bg-dark p-8 transition-colors duration-500 hover:bg-cream/[0.03]">
-                <div className="mb-4 h-px w-8 bg-accent/40 transition-all duration-500 group-hover:w-12 group-hover:bg-accent" />
-                <h3 className="font-serif text-lg font-light text-cream">
-                  {cap.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-cream/50">
-                  {cap.description}
-                </p>
+              <div className="glass-card-premium group flex h-full flex-col rounded-2xl p-7 justify-between">
+                <div>
+                  <div className="mb-4 h-px w-8 bg-[#d4af37]/40 transition-all duration-400 group-hover:w-12 group-hover:bg-[#d4af37]" />
+                  <h3 className="font-serif text-lg font-light text-slate-100 transition-colors duration-300 group-hover:text-[#d4af37]">
+                    {cap.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300/80 font-light">
+                    {cap.description}
+                  </p>
+                </div>
               </div>
             </ScrollFade>
           ))}

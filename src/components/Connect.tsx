@@ -2,47 +2,60 @@ import ScrollFade from "./ScrollFade";
 
 export default function Connect() {
   return (
-    <footer id="connect" className="section-padding border-t border-cream/8">
-      <div className="mx-auto max-w-4xl">
+    <footer id="connect" className="section-padding relative overflow-hidden bg-[#0b0c10] border-t border-white/10">
+      {/* Soft Gold Background Glow */}
+      <div className="bg-glow-gold-subtle absolute left-1/2 bottom-0 -translate-x-1/2 h-[500px] w-[500px] rounded-full pointer-events-none blur-3xl opacity-60" />
+
+      <div className="mx-auto max-w-5xl relative z-10">
         <ScrollFade>
-          <h2 className="section-heading">Connect</h2>
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="section-heading">06. Connect</h2>
+            <div className="h-px flex-1 bg-gradient-to-r from-[#d4af37]/30 via-[#d4af37]/10 to-transparent" />
+          </div>
         </ScrollFade>
 
         <ScrollFade delay={100}>
-          <div className="mt-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-            {/* Links */}
-            <nav className="flex flex-col gap-4" aria-label="Contact links">
+          <div className="glass-card-premium rounded-2xl p-8 sm:p-12 border border-white/10">
+            <div className="max-w-xl">
+              <h3 className="font-serif text-3xl font-light text-slate-100 sm:text-4xl leading-tight">
+                Let&apos;s build something <span className="text-gradient-gold">meaningful</span> together.
+              </h3>
+              <p className="mt-4 text-base font-light text-slate-300/80 leading-relaxed">
+                Whether you want to discuss a digital venture, video production &amp; tech automation, or just say hello — I am always open to conversation.
+              </p>
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4 pt-8 border-t border-white/5">
+              <a
+                href="mailto:hello@anweo.com"
+                className="btn-premium-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-wider"
+              >
+                hello@anweo.com ↗
+              </a>
+
               <a
                 href="https://linkedin.com/in/anwinshajan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-base font-light text-cream/60 transition-colors duration-300 hover:text-accent"
+                className="btn-premium-outline px-7 py-3.5 text-xs font-semibold uppercase tracking-wider"
               >
-                <span className="h-px w-4 bg-cream/20 transition-all duration-300 group-hover:w-6 group-hover:bg-accent" />
-                LinkedIn
+                LinkedIn ↗
               </a>
-              <a
-                href="mailto:hello@anweo.com"
-                className="group inline-flex items-center gap-2 text-base font-light text-cream/60 transition-colors duration-300 hover:text-accent"
-              >
-                <span className="h-px w-4 bg-cream/20 transition-all duration-300 group-hover:w-6 group-hover:bg-accent" />
-                Email
-              </a>
+
               <a
                 href="https://wa.me/919876543210"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-base font-light text-cream/60 transition-colors duration-300 hover:text-accent"
+                className="btn-premium-outline px-7 py-3.5 text-xs font-semibold uppercase tracking-wider"
               >
-                <span className="h-px w-4 bg-cream/20 transition-all duration-300 group-hover:w-6 group-hover:bg-accent" />
-                WhatsApp
+                WhatsApp ↗
               </a>
-            </nav>
+            </div>
 
-            {/* Copyright */}
-            <p className="text-xs font-light text-cream/20">
-              &copy; {new Date().getFullYear()} Anwin Shajan
-            </p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 text-xs font-light text-slate-400">
+              <p>&copy; {new Date().getFullYear()} Anwin Shajan. All rights reserved.</p>
+              <p className="text-[#d4af37]/80">Founder of Anweo, Nwee &amp; Nweedu · Kerala, India</p>
+            </div>
           </div>
         </ScrollFade>
       </div>

@@ -33,7 +33,7 @@ export default function Hero() {
           <div className="inline-flex items-center gap-2.5 rounded-full border border-[#d4af37]/25 bg-[#d4af37]/5 px-4 py-1.5 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
             <span className="text-[11px] font-medium tracking-[0.2em] text-[#d4af37] uppercase">
-              Founder &amp; System Architect · Kerala, India
+              Web Developer &amp; Founder at Anweo · Kerala, India
             </span>
           </div>
 
@@ -44,27 +44,25 @@ export default function Hero() {
 
           {/* Clean Description */}
           <p className="max-w-xl text-base font-light leading-relaxed text-slate-300/90 sm:text-lg">
-            Building high-impact digital ventures from Kerala. Founder of{" "}
-            <strong className="font-normal text-amber-200/90 border-b border-[#d4af37]/40 pb-0.5">Anweo</strong>,{" "}
-            <strong className="font-normal text-amber-200/90 border-b border-[#d4af37]/40 pb-0.5">Nwee</strong>, and{" "}
-            <strong className="font-normal text-amber-200/90 border-b border-[#d4af37]/40 pb-0.5">Nweedu</strong>.
+            Web Developer, Founder at{" "}
+            <strong className="font-normal text-amber-200/90 border-b border-[#d4af37]/40 pb-0.5">Anweo</strong>, and Digital Tech Lead. Specializing in high-performance Next.js architectures, modern web application development, and client growth.
           </p>
 
           {/* Metric Bar */}
           <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-slate-400 font-light border-y border-white/10 py-4 max-w-xl">
             <div>
+              <span className="font-serif text-lg font-normal text-white">Next.js &amp; Web</span>
+              <span className="ml-2">Architecture</span>
+            </div>
+            <div className="h-4 w-px bg-white/10" />
+            <div>
+              <span className="font-serif text-lg font-normal text-white">Anweo</span>
+              <span className="ml-2">Digital Agency</span>
+            </div>
+            <div className="h-4 w-px bg-white/10" />
+            <div>
               <span className="font-serif text-lg font-normal text-white">3+</span>
               <span className="ml-2">Live Ventures</span>
-            </div>
-            <div className="h-4 w-px bg-white/10" />
-            <div>
-              <span className="font-serif text-lg font-normal text-white">Agency &amp; Tech</span>
-              <span className="ml-2">Automation</span>
-            </div>
-            <div className="h-4 w-px bg-white/10" />
-            <div>
-              <span className="font-serif text-lg font-normal text-white">BSc</span>
-              <span className="ml-2">Adult Nursing</span>
             </div>
           </div>
 

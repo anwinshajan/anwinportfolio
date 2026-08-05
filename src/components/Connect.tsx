@@ -34,27 +34,45 @@ export default function Connect() {
               </a>
 
               <a
-                href="https://linkedin.com/in/anwinshajan"
+                href="https://www.linkedin.com/in/anwinshajan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-premium-outline px-7 py-3.5 text-xs font-semibold uppercase tracking-wider"
+                className="btn-premium-outline px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
               >
                 LinkedIn ↗
               </a>
 
               <a
-                href="https://wa.me/919876543210"
+                href="https://github.com/anwinshajan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-premium-outline px-7 py-3.5 text-xs font-semibold uppercase tracking-wider"
+                className="btn-premium-outline px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
               >
-                WhatsApp ↗
+                GitHub ↗
+              </a>
+
+              <a
+                href="https://twitter.com/anwinshajan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-premium-outline px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
+              >
+                X (Twitter) ↗
+              </a>
+
+              <a
+                href="https://www.youtube.com/@anwinshajan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-premium-outline px-6 py-3.5 text-xs font-semibold uppercase tracking-wider"
+              >
+                YouTube ↗
               </a>
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 text-xs font-light text-slate-400">
               <p>&copy; {new Date().getFullYear()} Anwin Shajan. All rights reserved.</p>
-              <p className="text-[#d4af37]/80">Founder of Anweo, Nwee &amp; Nweedu · Kerala, India</p>
+              <p className="text-[#d4af37]/80">Web Developer &amp; Founder at Anweo · Kerala, India</p>
             </div>
           </div>
         </ScrollFade>

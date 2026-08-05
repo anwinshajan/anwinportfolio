@@ -35,7 +35,7 @@ export default function About() {
                   <div className="px-4 py-3 flex items-center justify-between">
                     <div>
                       <h3 className="font-serif text-base font-light text-slate-100">Anwin Shajan</h3>
-                      <p className="text-[11px] text-[#d4af37]/80 font-light">Founder &amp; Builder</p>
+                      <p className="text-[11px] text-[#d4af37]/80 font-light">Web Developer &amp; Founder at Anweo</p>
                     </div>
                     <span className="text-[10px] text-slate-400 font-mono tracking-wider uppercase border border-white/10 px-2 py-0.5 rounded">
                       Kerala, IN
@@ -51,15 +51,13 @@ export default function About() {
             <ScrollFade delay={150}>
               <div className="space-y-5 font-sans text-base leading-relaxed text-slate-300/90 font-light">
                 <p>
-                  I build things on the internet. From full-scale digital marketing systems to e-commerce platforms and online learning — each venture is a direct response to a real-world problem I saw clearly enough to solve.
+                  I am a Web Developer, Digital Tech Lead, and Founder of <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Anweo</strong> based in Kerala, India. I specialize in designing and engineering scalable Next.js architectures, modern full-stack web applications, and digital growth engines for clients.
                 </p>
                 <p>
-                  <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Anweo</strong> is where it started: a full-service digital agency delivering video production, WhatsApp automation systems, and web apps.{" "}
-                  <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Nwee</strong> grew from product instincts sharpened by client work.{" "}
-                  <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Nweedu</strong> was born from watching Kerala SSLC students struggle with access to quality online tutoring.
+                  <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Anweo</strong> is my flagship digital agency: delivering bespoke web application architecture, video production, WhatsApp automation systems, and high-converting growth assets. From client engineering, product instincts paved the way for <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Nwee</strong> (e-commerce) and <strong className="text-slate-100 font-normal border-b border-[#d4af37]/40 pb-0.5">Nweedu</strong> (online tutoring for Kerala SSLC students).
                 </p>
                 <p>
-                  Alongside all of this, I&apos;m pursuing a BSc in Adult Nursing. Healthcare teaches systems thinking, precision, and empathy at scale — instincts that elevate everything I create.
+                  Alongside engineering and agency leadership, I pursue a BSc in Adult Nursing — bringing healthcare-grade discipline, systems thinking, and user empathy into every web architecture I build.
                 </p>
               </div>
             </ScrollFade>

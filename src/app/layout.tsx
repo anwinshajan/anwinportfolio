@@ -15,46 +15,47 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const siteUrl = "https://anwinshajan.com";
+const siteUrl = "https://anwinportfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Anwin Shajan — Founder of Anweo, Nwee & Nweedu",
+  title: "Anwin Shajan | Web Developer & Founder at Anweo",
   description:
-    "Anwin Shajan is a Kerala-based entrepreneur and builder. Founder of Anweo (digital marketing agency), Nwee (e-commerce), and Nweedu (online tutoring for Kerala SSLC students).",
+    "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
   keywords: [
     "Anwin Shajan",
+    "Anwin Shajan portfolio",
+    "Anwin Shajan Kerala",
     "Anweo",
-    "Nwee",
-    "Nweedu",
-    "Kerala entrepreneur",
-    "digital marketing agency Kerala",
-    "web developer Kerala",
+    "Next.js Developer Kerala",
+    "Web Developer Ernakulam",
+    "Anweo founder",
   ],
   authors: [{ name: "Anwin Shajan", url: siteUrl }],
   creator: "Anwin Shajan",
+  publisher: "Anweo",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
     siteName: "Anwin Shajan",
-    title: "Anwin Shajan — Founder of Anweo, Nwee & Nweedu",
+    title: "Anwin Shajan | Web Developer & Founder at Anweo",
     description:
-      "Kerala-based entrepreneur building digital ventures — Anweo, Nwee, and Nweedu.",
+      "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Anwin Shajan — Founder & Builder",
+        alt: "Anwin Shajan — Web Developer & Founder at Anweo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anwin Shajan — Founder of Anweo, Nwee & Nweedu",
+    title: "Anwin Shajan | Web Developer & Founder at Anweo",
     description:
-      "Kerala-based entrepreneur building digital ventures — Anweo, Nwee, and Nweedu.",
+      "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
     images: ["/og-image.png"],
   },
   alternates: {
@@ -77,17 +78,25 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anwin Shajan",
-  jobTitle: "Entrepreneur & Founder",
   url: siteUrl,
-  sameAs: ["https://linkedin.com/in/anwinshajan"],
-  description:
-    "Kerala-based entrepreneur and builder. Founder of Anweo, Nwee, and Nweedu.",
+  jobTitle: "Web Developer & Founder",
+  worksFor: {
+    "@type": "Organization",
+    name: "Anweo",
+    url: siteUrl,
+  },
   knowsAbout: [
     "Web Development",
-    "Digital Marketing",
-    "Video Production",
-    "E-Commerce",
-    "Online Education",
+    "Next.js",
+    "Frontend Architecture",
+    "IT Consulting",
+    "Digital Growth & E-Commerce",
+  ],
+  sameAs: [
+    "https://www.linkedin.com/in/anwinshajan",
+    "https://github.com/anwinshajan",
+    "https://twitter.com/anwinshajan",
+    "https://www.youtube.com/@anwinshajan",
   ],
 };
 
@@ -108,3 +117,4 @@ export default function RootLayout({
     </html>
   );
 }
+

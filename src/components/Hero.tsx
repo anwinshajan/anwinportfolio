@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Image from "next/image";
 import { hero } from "@/content/site";
 import AnimatedCounter from "./AnimatedCounter";
@@ -38,6 +39,21 @@ const photoVariant: Variants = {
 };
 
 export default function Hero() {
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    // hero_2.jpg stays for 5 seconds (5000ms)
+    // hero_3.jpg stays for 10 seconds (10000ms)
+    const currentPhoto = hero.heroPhotos[photoIndex];
+    const duration = currentPhoto.includes("hero_2") ? 5000 : 10000;
+
+    const timer = setTimeout(() => {
+      setPhotoIndex((prev) => (prev + 1) % hero.heroPhotos.length);
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [photoIndex]);
+
   return (
     <section
       id="hero"
@@ -131,37 +147,91 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right column: Portrait ── */}
+          {/* ── Right column: Interactive 3D Floating Photo Loop ── */}
           <motion.div
             className="lg:col-span-5 xl:col-span-5 relative"
             variants={photoVariant}
             initial="hidden"
             animate="show"
           >
-            <div className="relative group mx-auto max-w-sm lg:max-w-none">
-              {/* Decorative coral accent behind photo */}
+            <div
+              className="relative group mx-auto max-w-sm lg:max-w-none perspective-1000"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                e.currentTarget.style.setProperty("--rx", `${-y / 15}deg`);
+                e.currentTarget.style.setProperty("--ry", `${x / 15}deg`);
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty("--rx", "0deg");
+                e.currentTarget.style.setProperty("--ry", "0deg");
+              }}
+              style={{
+                perspective: "1000px",
+              }}
+            >
+              {/* Decorative coral glowing 3D pedestal behind photo */}
               <div
-                className="absolute -bottom-4 -right-4 h-full w-full rounded-2xl bg-[#D4521A]/10 border border-[#D4521A]/15"
+                className="absolute -bottom-6 -right-6 h-full w-full rounded-3xl bg-gradient-to-br from-[#D4521A]/20 via-[#D4521A]/5 to-transparent border border-[#D4521A]/20 blur-sm transform group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"
                 aria-hidden="true"
               />
 
-              {/* Photo frame */}
-              <div className="relative overflow-hidden rounded-2xl bg-[#F3EEE7] shadow-[0_20px_60px_-10px_rgba(26,18,10,0.18)] border border-[#E5DDD5]">
-                <div className="relative h-[480px] sm:h-[520px] w-full overflow-hidden">
-                  <Image
-                    src={hero.photoSrc}
-                    alt={hero.photoAlt}
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  {/* Subtle warm overlay on photo */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2]/30 via-transparent to-transparent" />
+              {/* 3D Tilted Card Frame */}
+              <div
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#FAF7F2] via-[#F3EEE7] to-[#EAE3D9] shadow-[0_25px_60px_-15px_rgba(26,18,10,0.22)] border border-[#E5DDD5] transition-transform duration-200 ease-out"
+                style={{
+                  transform: "rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) transform-style-3d",
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                {/* 3D Depth backdrop ambient light */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(212,82,26,0.12),transparent_70%)] pointer-events-none" />
+
+                {/* Floating 3D Image Container */}
+                <div className="relative h-[340px] xs:h-[400px] sm:h-[480px] lg:h-[520px] w-full flex items-center justify-center overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={photoIndex}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                      className="relative h-full w-full"
+                    >
+                      <Image
+                        src={hero.heroPhotos[photoIndex]}
+                        alt={hero.photoAlt}
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                  {/* Subtle warm overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2]/60 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Photo Pagination Indicator Dots */}
+                  <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3 py-1.5 border border-white/20">
+                    {hero.heroPhotos.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setPhotoIndex(i)}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          i === photoIndex ? "w-5 sm:w-6 bg-[#D4521A]" : "w-2 bg-white/60 hover:bg-white"
+                        }`}
+                        aria-label={`Go to slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
 
                 {/* Photo caption */}
-                <div className="px-5 py-4 flex items-center justify-between bg-white/60 backdrop-blur-sm border-t border-[#E5DDD5]">
+                <div
+                  className="px-6 py-4 flex items-center justify-between bg-white/70 backdrop-blur-md border-t border-[#E5DDD5]/80"
+                  style={{ transform: "translateZ(20px)" }}
+                >
                   <div>
                     <p
                       className="text-base font-light text-[#1A1A1A]"
@@ -170,10 +240,10 @@ export default function Hero() {
                       Anwin Shajan
                     </p>
                     <p className="text-[11px] text-[#D4521A] font-medium tracking-wide mt-0.5">
-                      Founder & Builder
+                      Entrepreneur · Graphic Designer · Business Strategist
                     </p>
                   </div>
-                  <span className="text-[10px] text-[#7A746E] font-mono tracking-widest uppercase border border-[#E5DDD5] bg-[#FAF7F2] px-2.5 py-1 rounded">
+                  <span className="text-[10px] text-[#7A746E] font-mono tracking-widest uppercase border border-[#E5DDD5] bg-[#FAF7F2] px-2.5 py-1 rounded-full shadow-sm">
                     Kerala, IN
                   </span>
                 </div>

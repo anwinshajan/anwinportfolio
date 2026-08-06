@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import ScrollFade from "./ScrollFade";
 import { about } from "@/content/site";
 
@@ -14,9 +17,11 @@ export default function About() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Section label */}
         <ScrollFade>
-          <div className="flex items-center gap-4 mb-14">
-            <span className="section-label">About the Founder</span>
-            <div className="h-px flex-1 bg-gradient-to-r from-[#D4521A]/25 to-transparent" />
+          <div className="mb-14 flex items-center gap-3">
+            <span className="coral-dot" />
+            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#7A746E]">
+              01 — About
+            </span>
           </div>
         </ScrollFade>
 
@@ -25,27 +30,50 @@ export default function About() {
           {/* Photo — left */}
           <div className="lg:col-span-5">
             <ScrollFade delay={80} direction="left">
-              <div className="relative group mx-auto max-w-sm lg:max-w-none">
+              <div
+                className="relative group mx-auto max-w-sm lg:max-w-none perspective-1000"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  e.currentTarget.style.setProperty("--rx", `${-y / 15}deg`);
+                  e.currentTarget.style.setProperty("--ry", `${x / 15}deg`);
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.setProperty("--rx", "0deg");
+                  e.currentTarget.style.setProperty("--ry", "0deg");
+                }}
+                style={{ perspective: "1000px" }}
+              >
                 {/* Coral accent stripe */}
                 <div
                   className="absolute top-8 -left-3 w-1 h-3/4 rounded-full bg-[#D4521A]/30"
                   aria-hidden="true"
                 />
 
-                <div className="relative overflow-hidden rounded-2xl border border-[#E5DDD5] shadow-[0_8px_32px_0_rgba(26,18,10,0.12)] ml-4">
-                  <div className="relative h-[420px] w-full overflow-hidden bg-[#FAF7F2]">
+                <div
+                  className="relative overflow-hidden rounded-3xl border border-[#E5DDD5] shadow-[0_20px_50px_rgba(26,18,10,0.15)] ml-4 bg-gradient-to-b from-[#FAF7F2] via-[#F3EEE7] to-[#EAE3D9] transition-transform duration-200 ease-out"
+                  style={{
+                    transform: "rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) transform-style-3d",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <div className="relative h-[400px] sm:h-[500px] w-full overflow-hidden">
                     <Image
                       src={about.photoSrc}
                       alt={about.photoAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-104"
+                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     {/* Warm overlay gradient bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#F3EEE7]/40 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2]/40 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  <div className="px-5 py-4 bg-white/60 backdrop-blur-sm border-t border-[#E5DDD5] flex items-center justify-between">
+                  <div
+                    className="px-5 py-4 bg-white/70 backdrop-blur-md border-t border-[#E5DDD5] flex items-center justify-between"
+                    style={{ transform: "translateZ(15px)" }}
+                  >
                     <div>
                       <p
                         className="text-base font-light text-[#1A1A1A]"
@@ -54,10 +82,10 @@ export default function About() {
                         Anwin Shajan
                       </p>
                       <p className="text-[11px] text-[#D4521A] font-medium tracking-wide mt-0.5">
-                        Web Developer & Founder at Anweo
+                        Entrepreneur · Graphic Designer · Business Strategist
                       </p>
                     </div>
-                    <span className="text-[10px] font-mono tracking-widest uppercase border border-[#E5DDD5] bg-[#FAF7F2] text-[#7A746E] px-2.5 py-1 rounded">
+                    <span className="text-[10px] font-mono tracking-widest uppercase border border-[#E5DDD5] bg-[#FAF7F2] text-[#7A746E] px-2.5 py-1 rounded-full shadow-sm">
                       Kerala, IN
                     </span>
                   </div>

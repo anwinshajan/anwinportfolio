@@ -25,14 +25,14 @@ export const hero = {
   name: "Anwin\nShajan",
 
   /** Small badge above the name */
-  badge: "Founder & Builder · Kerala, India",
+  badge: "Entrepreneur · Graphic Designer · Business Strategist",
 
   /** Bold sub-headline beneath the name */
-  tagline: "Building digital ventures that solve real problems.",
+  tagline: "Entrepreneur, Graphic Designer, and Business Strategist.",
 
   /** Body paragraph in the hero */
   description:
-    "Founder of Anweo, Nwee & Nweedu. I design and engineer the full stack — from product idea to live deployment.",
+    "Founder of Anweo, Nwee & Nweedu. I design, strategist, and grow brand identities — from concept to scale.",
 
   /** Stats displayed in the metric bar */
   stats: [
@@ -49,14 +49,18 @@ export const hero = {
 
   /** Path to headshot photo — place image in /public/images/ */
   photoSrc: "/images/anwin_photo_v3.png",
-  photoAlt: "Anwin Shajan — Founder & Builder",
+  heroPhotos: [
+    "/images/hero_2.jpg",
+    "/images/hero_3.jpg",
+  ],
+  photoAlt: "Anwin Shajan — Entrepreneur, Graphic Designer & Business Strategist",
 } as const;
 
 // ── About Section ───────────────────────────────────────────
 export const about = {
   /** Array of bio paragraphs. Each string renders as a <p> tag. */
   bio: [
-    "I'm a web developer, digital tech lead, and founder based in Kerala, India. I build internet businesses — from product conception through engineering, launch, and growth.",
+    "I'm an entrepreneur, graphic designer, and business strategist based in Kerala, India. I build and scale internet businesses — combining strategic vision, brand execution, and growth.",
     "Anweo is my flagship digital agency: bespoke web architecture, video production, WhatsApp automation systems, and performance marketing for brands that need creative execution backed by technical infrastructure.",
     "Nweedu goes beyond conventional tutoring — we work with students at every level, teaching through a fresh and engaging lens with qualified teachers. Alongside the curriculum, we offer content not taught in school: money management, life skills, and interest-driven learning that sets students up for real-world success. Nwee is our e-commerce platform built for speed and scale.",
     "KGVYC, our gaming community, is now in its expansion phase — growing tournaments, content, and a thriving competitive culture across Kerala and beyond.",
@@ -67,7 +71,7 @@ export const about = {
     "Range isn't a weakness — it's the most undervalued strength a builder can have.",
 
   /** Path to about photo (can be same as hero or different candid shot) */
-  photoSrc: "/images/anwin_photo_v3.png",
+  photoSrc: "/images/about_photo.jpg",
   photoAlt: "Anwin Shajan",
 } as const;
 
@@ -95,7 +99,7 @@ export const social: SocialLink[] = [
   },
   {
     platform: "YouTube",
-    url: "https://www.youtube.com/@Swipeetechy",
+    url: "https://www.youtube.com/@anwin_shajan",
     label: "Visit Youtube",
   },
   {

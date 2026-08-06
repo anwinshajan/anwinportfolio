@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { siteMeta, siteUrl } from "@/content/site";
+import FloatingSocialLoop from "@/components/FloatingSocialLoop";
+import MascotTalkBubble from "@/components/MascotTalkBubble";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Anwin Shajan — Founder & Web Developer",
+        alt: "Anwin Shajan — Entrepreneur, Graphic Designer & Business Strategist",
       },
     ],
   },
@@ -68,7 +70,7 @@ const jsonLd = {
   "@type": "Person",
   name: "Anwin Shajan",
   url: siteUrl,
-  jobTitle: "Founder & Web Developer",
+  jobTitle: "Entrepreneur, Graphic Designer & Business Strategist",
   worksFor: {
     "@type": "Organization",
     name: "Anweo",
@@ -85,7 +87,7 @@ const jsonLd = {
   sameAs: [
     "https://www.linkedin.com/in/anwinshajan",
     "https://www.instagram.com/__an_xin_/",
-    "https://www.youtube.com/@Swipeetechy",
+    "https://www.youtube.com/@anwin_shajan",
     "https://twitter.com/anwinshajan",
   ],
 };
@@ -108,6 +110,8 @@ export default function RootLayout({
       </head>
       <body className="bg-[#FAF7F2] text-[#1A1A1A] antialiased">
         {children}
+        <FloatingSocialLoop />
+        <MascotTalkBubble />
       </body>
     </html>
   );

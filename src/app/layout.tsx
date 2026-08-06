@@ -1,36 +1,27 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { siteMeta, siteUrl } from "@/content/site";
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-fraunces",
-  weight: ["300", "400"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
 });
-
-const siteUrl = "https://anwinportfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Anwin Shajan | Web Developer & Founder at Anweo",
-  description:
-    "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
-  keywords: [
-    "Anwin Shajan",
-    "Anwin Shajan portfolio",
-    "Anwin Shajan Kerala",
-    "Anweo",
-    "Next.js Developer Kerala",
-    "Web Developer Ernakulam",
-    "Anweo founder",
-  ],
+  title: siteMeta.title,
+  description: siteMeta.description,
+  keywords: [...siteMeta.keywords],
   authors: [{ name: "Anwin Shajan", url: siteUrl }],
   creator: "Anwin Shajan",
   publisher: "Anweo",
@@ -39,23 +30,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Anwin Shajan",
-    title: "Anwin Shajan | Web Developer & Founder at Anweo",
-    description:
-      "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
+    title: "Anwin Shajan | Founder of Anweo",
+    description: "Building Anweo, Nwee, Nweedu, and KGVYC from Kerala. Digital marketing, e-commerce, tutoring, and community — one founder, four ventures.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Anwin Shajan — Web Developer & Founder at Anweo",
+        alt: "Anwin Shajan — Founder & Web Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anwin Shajan | Web Developer & Founder at Anweo",
-    description:
-      "Official portfolio of Anwin Shajan—Web Developer, Founder at Anweo, and Digital Tech Lead specializing in Next.js architectures, modern web application development, and client growth.",
+    title: siteMeta.title,
+    description: siteMeta.description,
     images: ["/og-image.png"],
   },
   alternates: {
@@ -79,24 +68,25 @@ const jsonLd = {
   "@type": "Person",
   name: "Anwin Shajan",
   url: siteUrl,
-  jobTitle: "Web Developer & Founder",
+  jobTitle: "Founder & Web Developer",
   worksFor: {
     "@type": "Organization",
     name: "Anweo",
-    url: siteUrl,
+    url: "https://anweo.com",
   },
   knowsAbout: [
     "Web Development",
     "Next.js",
     "Frontend Architecture",
-    "IT Consulting",
-    "Digital Growth & E-Commerce",
+    "Digital Marketing",
+    "E-Commerce",
+    "Video Production",
   ],
   sameAs: [
     "https://www.linkedin.com/in/anwinshajan",
-    "https://github.com/anwinshajan",
+    "https://www.instagram.com/__an_xin_/",
+    "https://www.youtube.com/@Swipeetechy",
     "https://twitter.com/anwinshajan",
-    "https://www.youtube.com/@anwinshajan",
   ],
 };
 
@@ -106,15 +96,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${dmSans.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-dark text-cream antialiased">{children}</body>
+      <body className="bg-[#FAF7F2] text-[#1A1A1A] antialiased">
+        {children}
+      </body>
     </html>
   );
 }
-

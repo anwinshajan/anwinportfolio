@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { posts } from "@/data/posts";
+import { posts } from "@/content/notes";
+import { siteUrl } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = "https://anwinshajan.com";
 
   const postEntries = posts.map((post) => ({
     url: `${siteUrl}/notes/${post.slug}`,

@@ -117,7 +117,7 @@ export const social: SocialLink[] = [
 export const siteUrl = "https://anwinportfolio.vercel.app";
 
 export const siteMeta = {
-  title: "Anwin Shajan | Founder of Anweo — Digital Marketing & Development",
+  title: "Anwin Shajan | Entrepreneur, Graphic Designer & Business Strategist",
   description:
     "Anwin Shajan is a Kerala-based founder building Anweo (digital marketing agency), Nwee (e-commerce), Nweedu (online tutoring), and KGVYC (gaming community). Explore his ventures and writing.",
   keywords: [

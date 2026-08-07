@@ -1,58 +1,50 @@
 // ============================================================
 //  LIVE UPDATES CONTENT — Edit this file to publish new life & business updates!
-//  Newest updates appear at the top of the Hero Status Feed.
+//  Format: LIFEUPDATE{date} >> [category] update message
 // ============================================================
 
 export interface StatusUpdate {
   id: string;
+  date: string; // e.g. "2026.08.08"
   category: "Business" | "Life & Learning" | "Venture" | "Design & Tech";
-  timestamp: string;
-  title: string;
-  content: string;
+  text: string;
   tag?: string;
-  isHot?: boolean;
 }
 
 export const statusUpdates: StatusUpdate[] = [
   {
     id: "up_1",
+    date: "2026.08.08",
     category: "Business",
-    timestamp: "Just now",
-    title: "Scaling Anweo's Client Automations",
-    content: "Deploying automated WhatsApp lead funnels & Razorpay booking workflows for 15+ Kerala SMBs.",
-    tag: "Anweo Agency",
-    isHot: true,
+    text: "Scaling Anweo's client automations (WhatsApp funnels & Razorpay workflows for 15+ SMBs)",
+    tag: "Anweo",
   },
   {
     id: "up_2",
+    date: "2026.08.07",
     category: "Venture",
-    timestamp: "Yesterday",
-    title: "Nweedu Life-Skills Curriculum Expand",
-    content: "Added money management & real-world practical skills modules alongside academic tutoring.",
-    tag: "Nweedu EdTech",
+    text: "Nweedu expanded with life-skills & money management modules alongside academic tutoring",
+    tag: "Nweedu",
   },
   {
     id: "up_3",
+    date: "2026.08.05",
     category: "Design & Tech",
-    timestamp: "3 days ago",
-    title: "Next.js 16 + Turbopack Infrastructure",
-    content: "Migrated web architecture across all venture portals for sub-second page loads & edge performance.",
-    tag: "Tech Stack",
+    text: "Next.js 16 + Turbopack architecture migration completed across all portals for sub-second performance",
+    tag: "Infrastructure",
   },
   {
     id: "up_4",
+    date: "2026.08.03",
     category: "Life & Learning",
-    timestamp: "5 days ago",
-    title: "KGVYC Community Expansion",
-    content: "Organizing Kerala's next esports tournament bracket with 500+ active competitive players.",
-    tag: "KGVYC Esports",
+    text: "Organizing Kerala's esports tournament bracket in KGVYC with 500+ active players",
+    tag: "KGVYC",
   },
   {
     id: "up_5",
+    date: "2026.08.01",
     category: "Design & Tech",
-    timestamp: "1 week ago",
-    title: "Cinematic Video Ad Production",
-    content: "Filming 4K commercial campaign assets in Blender 3D & Premiere for upcoming brand launches.",
+    text: "Filming & rendering 4K commercial ad campaign assets in Blender 3D & Premiere Pro",
     tag: "Video Production",
   },
 ];

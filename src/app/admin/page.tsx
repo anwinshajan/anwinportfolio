@@ -22,7 +22,9 @@ export default function AdminPage() {
 
   const [adminPassword, setAdminPassword] = useState("anwin123");
   const [changePassNew, setChangePassNew] = useState("");
+  const [changePassConfirm, setChangePassConfirm] = useState("");
   const [passMsg, setPassMsg] = useState("");
+  const [passError, setPassError] = useState("");
 
   const DEFAULT_USER = "anwin";
 
@@ -46,10 +48,23 @@ export default function AdminPage() {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!changePassNew.trim()) return;
+    setPassError("");
+    setPassMsg("");
+
+    if (!changePassNew.trim() || !changePassConfirm.trim()) {
+      setPassError("Please fill out both password fields.");
+      return;
+    }
+
+    if (changePassNew !== changePassConfirm) {
+      setPassError("Passwords do not match. Please re-enter them carefully.");
+      return;
+    }
+
     setAdminPassword(changePassNew.trim());
     localStorage.setItem("anwin_admin_password", changePassNew.trim());
     setChangePassNew("");
+    setChangePassConfirm("");
     setPassMsg("Admin password updated successfully!");
     setTimeout(() => setPassMsg(""), 3000);
   };
@@ -397,29 +412,52 @@ export default function AdminPage() {
           >
             Change Admin Password
           </h2>
-          <form onSubmit={handleChangePassword} className="flex flex-col sm:flex-row gap-3 items-end">
-            <div className="flex-1 w-full">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#7A746E] mb-1">
-                New Password
-              </label>
-              <input
-                type="password"
-                value={changePassNew}
-                onChange={(e) => setChangePassNew(e.target.value)}
-                placeholder="Enter new password"
-                className="w-full px-4 py-2.5 rounded-xl border border-[#E5DDD5] bg-[#FAF7F2] text-sm focus:outline-none focus:border-[#D4521A]"
-                required
-              />
+          <form onSubmit={handleChangePassword} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#7A746E] mb-1">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  value={changePassNew}
+                  onChange={(e) => setChangePassNew(e.target.value)}
+                  placeholder="Enter new password"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E5DDD5] bg-[#FAF7F2] text-sm focus:outline-none focus:border-[#D4521A]"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#7A746E] mb-1">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  value={changePassConfirm}
+                  onChange={(e) => setChangePassConfirm(e.target.value)}
+                  placeholder="Re-enter new password"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E5DDD5] bg-[#FAF7F2] text-sm focus:outline-none focus:border-[#D4521A]"
+                  required
+                />
+              </div>
             </div>
-            <button type="submit" className="btn-ghost text-xs py-2.5 px-6 whitespace-nowrap">
+
+            {passError && (
+              <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
+                ⚠ {passError}
+              </p>
+            )}
+
+            {passMsg && (
+              <p className="text-xs text-green-700 bg-green-50 p-2.5 rounded-xl border border-green-200 font-medium">
+                ✓ {passMsg}
+              </p>
+            )}
+
+            <button type="submit" className="btn-ghost text-xs py-2.5 px-6">
               Update Password
             </button>
           </form>
-          {passMsg && (
-            <p className="text-xs text-green-700 bg-green-50 p-2.5 rounded-xl border border-green-200 font-medium">
-              ✓ {passMsg}
-            </p>
-          )}
         </div>
       </div>
     </div>

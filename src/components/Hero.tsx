@@ -131,7 +131,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right column: Studio Command Terminal & Automation Dashboard ── */}
+          {/* ── Right column: Life & Business Terminal Log Feed ── */}
           <motion.div
             className="lg:col-span-5 xl:col-span-5 relative"
             variants={photoVariant}

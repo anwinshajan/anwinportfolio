@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { hero } from "@/content/site";
 import AnimatedCounter from "./AnimatedCounter";
-import HeroCanvas from "./HeroCanvas";
+import HeroVentureDeck from "./HeroVentureDeck";
 
 const springEase = "easeOut" as const;
 
@@ -131,14 +131,14 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right column: Interactive Minimalist Creative Canvas ── */}
+          {/* ── Right column: Interactive Venture Deck Showcase ── */}
           <motion.div
             className="lg:col-span-5 xl:col-span-5 relative"
             variants={photoVariant}
             initial="hidden"
             animate="show"
           >
-            <HeroCanvas />
+            <HeroVentureDeck />
           </motion.div>
 
         </div>

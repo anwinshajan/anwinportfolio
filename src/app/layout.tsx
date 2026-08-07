@@ -27,13 +27,25 @@ export const metadata: Metadata = {
   authors: [{ name: "Anwin Shajan", url: siteUrl }],
   creator: "Anwin Shajan",
   publisher: "Anweo",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
     siteName: "Anwin Shajan",
-    title: "Anwin Shajan | Founder of Anweo",
-    description: "Building Anweo, Nwee, Nweedu, and KGVYC from Kerala. Digital marketing, e-commerce, tutoring, and community — one founder, four ventures.",
+    title: siteMeta.title,
+    description: siteMeta.description,
     images: [
       {
         url: "/og-image.png",
@@ -65,7 +77,15 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Anwin Shajan",
+  alternateName: ["Anweo"],
+  url: "https://anwinportfolio.vercel.app/",
+};
+
+const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anwin Shajan",
@@ -88,7 +108,7 @@ const jsonLd = {
     "https://www.linkedin.com/in/anwinshajan",
     "https://www.instagram.com/__an_xin_/",
     "https://www.youtube.com/@anwin_shajan",
-    "https://twitter.com/anwinshajan",
+    "https://twitter.com/anwinshajan_",
   ],
 };
 
@@ -105,7 +125,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
       <body className="bg-[#FAF7F2] text-[#1A1A1A] antialiased">

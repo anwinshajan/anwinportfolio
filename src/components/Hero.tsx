@@ -42,9 +42,8 @@ export default function Hero() {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
-    // hero_2.jpg stays for 5 seconds (5000ms)
-    // hero_3.jpg stays for 10 seconds (10000ms)
-    const currentPhoto = hero.heroPhotos[photoIndex];
+    if (hero.heroPhotos.length <= 1) return;
+    const currentPhoto = hero.heroPhotos[photoIndex] || "";
     const duration = currentPhoto.includes("hero_2") ? 5000 : 10000;
 
     const timer = setTimeout(() => {
@@ -213,18 +212,20 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2]/60 via-transparent to-transparent pointer-events-none" />
 
                   {/* Photo Pagination Indicator Dots */}
-                  <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3 py-1.5 border border-white/20">
-                    {hero.heroPhotos.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setPhotoIndex(i)}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          i === photoIndex ? "w-5 sm:w-6 bg-[#D4521A]" : "w-2 bg-white/60 hover:bg-white"
-                        }`}
-                        aria-label={`Go to slide ${i + 1}`}
-                      />
-                    ))}
-                  </div>
+                  {hero.heroPhotos.length > 1 && (
+                    <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3 py-1.5 border border-white/20">
+                      {hero.heroPhotos.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setPhotoIndex(i)}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            i === photoIndex ? "w-5 sm:w-6 bg-[#D4521A]" : "w-2 bg-white/60 hover:bg-white"
+                          }`}
+                          aria-label={`Go to slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Photo caption */}

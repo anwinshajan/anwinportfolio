@@ -48,10 +48,9 @@ export const hero = {
   ctaSecondary: { label: "Get in Touch", href: "#connect" } satisfies CTA,
 
   /** Path to headshot photo — place image in /public/images/ */
-  photoSrc: "/images/anwin_photo_v3.png",
+  photoSrc: "/images/hero_avatar.jpg",
   heroPhotos: [
-    "/images/hero_2.jpg",
-    "/images/hero_3.jpg",
+    "/images/hero_avatar.jpg",
   ],
   photoAlt: "Anwin Shajan — Entrepreneur, Graphic Designer & Business Strategist",
 } as const;

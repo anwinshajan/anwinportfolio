@@ -15,42 +15,43 @@ export default function AdminPage() {
   const [newCategory, setNewCategory] = useState<StatusUpdate["category"]>("Business");
   const [newText, setNewText] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editDate, setEditDate] = useState("");
+  const [editCategory, setEditCategory] = useState<StatusUpdate["category"]>("Business");
+  const [editText, setEditText] = useState("");
 
-  // Default credentials
-  const ADMIN_USER = "anwin";
-  const ADMIN_PASS = "anwin123";
+  const [adminPassword, setAdminPassword] = useState("anwin123");
+  const [changePassNew, setChangePassNew] = useState("");
+  const [passMsg, setPassMsg] = useState("");
 
-  // Format today's date YYYY.MM.DD
+  const DEFAULT_USER = "anwin";
+
+  // Load updates & password from localStorage
   useEffect(() => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    setNewDate(`${yyyy}.${mm}.${dd}`);
-  }, []);
-
-  // Load updates from localStorage or fallback
-  useEffect(() => {
-    const saved = localStorage.getItem("anwin_life_updates");
-    if (saved) {
-      try {
-        setUpdates(JSON.parse(saved));
-      } catch {
-        setUpdates(statusUpdates);
-      }
-    } else {
-      setUpdates(statusUpdates);
+    const savedPass = localStorage.getItem("anwin_admin_password");
+    if (savedPass) {
+      setAdminPassword(savedPass);
     }
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === ADMIN_USER && password === ADMIN_PASS) {
+    if (username.trim() === DEFAULT_USER && password === adminPassword) {
       setIsAuthenticated(true);
       setLoginError("");
     } else {
-      setLoginError("Invalid username or password. Try username 'anwin' and password 'anwin123'");
+      setLoginError("Invalid username or password.");
     }
+  };
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!changePassNew.trim()) return;
+    setAdminPassword(changePassNew.trim());
+    localStorage.setItem("anwin_admin_password", changePassNew.trim());
+    setChangePassNew("");
+    setPassMsg("Admin password updated successfully!");
+    setTimeout(() => setPassMsg(""), 3000);
   };
 
   const saveUpdates = (newList: StatusUpdate[]) => {
@@ -81,6 +82,23 @@ export default function AdminPage() {
   const handleDelete = (id: string) => {
     const updated = updates.filter((u) => u.id !== id);
     saveUpdates(updated);
+  };
+
+  const handleStartEdit = (item: StatusUpdate) => {
+    setEditingId(item.id);
+    setEditDate(item.date);
+    setEditCategory(item.category);
+    setEditText(item.text);
+  };
+
+  const handleSaveEdit = (id: string) => {
+    const updated = updates.map((u) =>
+      u.id === id
+        ? { ...u, date: editDate, category: editCategory, text: editText }
+        : u
+    );
+    saveUpdates(updated);
+    setEditingId(null);
   };
 
   const handleClearAll = () => {
@@ -285,27 +303,122 @@ export default function AdminPage() {
               {updates.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-start justify-between gap-4 p-4 rounded-2xl bg-[#0B0E14] text-[#DCE4EE] border border-[#1E2638]"
+                  className="p-4 rounded-2xl bg-[#0B0E14] text-[#DCE4EE] border border-[#1E2638] space-y-3"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#00E5A3] font-bold">
-                        LIFEUPDATE&#123;item.date&#125; &gt;&gt;
-                      </span>
-                      <span className="text-xs text-[#D4521A]">[{item.category}]</span>
+                  {editingId === item.id ? (
+                    <div className="space-y-3 font-sans">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[10px] uppercase text-[#8A98A8]">Date</label>
+                          <input
+                            type="text"
+                            value={editDate}
+                            onChange={(e) => setEditDate(e.target.value)}
+                            className="w-full px-3 py-1.5 rounded-lg border border-[#2A3448] bg-[#141A26] text-xs text-white"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] uppercase text-[#8A98A8]">Category</label>
+                          <select
+                            value={editCategory}
+                            onChange={(e) => setEditCategory(e.target.value as StatusUpdate["category"])}
+                            className="w-full px-3 py-1.5 rounded-lg border border-[#2A3448] bg-[#141A26] text-xs text-white"
+                          >
+                            <option value="Business">Business</option>
+                            <option value="Venture">Venture</option>
+                            <option value="Life & Learning">Life & Learning</option>
+                            <option value="Design & Tech">Design & Tech</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-[10px] uppercase text-[#8A98A8]">Update Message</label>
+                        <textarea
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          rows={2}
+                          className="w-full px-3 py-1.5 rounded-lg border border-[#2A3448] bg-[#141A26] text-xs text-white"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleSaveEdit(item.id)}
+                          className="text-xs bg-[#D4521A] text-white px-3 py-1 rounded-lg font-semibold"
+                        >
+                          Save Changes
+                        </button>
+                        <button
+                          onClick={() => setEditingId(null)}
+                          className="text-xs bg-gray-700 text-gray-200 px-3 py-1 rounded-lg"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
-                    <p className="text-xs text-[#9EAAB8]">{item.text}</p>
-                  </div>
+                  ) : (
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#00E5A3] font-bold">
+                            LIFEUPDATE&#123;{item.date}&#125; &gt;&gt;
+                          </span>
+                          <span className="text-xs text-[#D4521A]">[{item.category}]</span>
+                        </div>
+                        <p className="text-xs text-[#9EAAB8]">{item.text}</p>
+                      </div>
 
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-xs font-sans text-red-400 hover:text-red-200 border border-red-900/50 bg-red-950/40 px-3 py-1 rounded-lg"
-                  >
-                    Delete
-                  </button>
+                      <div className="flex items-center gap-2 font-sans">
+                        <button
+                          onClick={() => handleStartEdit(item)}
+                          className="text-xs text-blue-400 hover:text-blue-200 border border-blue-900/50 bg-blue-950/40 px-3 py-1 rounded-lg"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item.id)}
+                          className="text-xs text-red-400 hover:text-red-200 border border-red-900/50 bg-red-950/40 px-3 py-1 rounded-lg"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
+          )}
+        </div>
+
+        {/* Change Admin Password Card */}
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E5DDD5] shadow-sm space-y-4">
+          <h2
+            className="text-2xl font-light text-[#1A1A1A]"
+            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+          >
+            Change Admin Password
+          </h2>
+          <form onSubmit={handleChangePassword} className="flex flex-col sm:flex-row gap-3 items-end">
+            <div className="flex-1 w-full">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#7A746E] mb-1">
+                New Password
+              </label>
+              <input
+                type="password"
+                value={changePassNew}
+                onChange={(e) => setChangePassNew(e.target.value)}
+                placeholder="Enter new password"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#E5DDD5] bg-[#FAF7F2] text-sm focus:outline-none focus:border-[#D4521A]"
+                required
+              />
+            </div>
+            <button type="submit" className="btn-ghost text-xs py-2.5 px-6 whitespace-nowrap">
+              Update Password
+            </button>
+          </form>
+          {passMsg && (
+            <p className="text-xs text-green-700 bg-green-50 p-2.5 rounded-xl border border-green-200 font-medium">
+              ✓ {passMsg}
+            </p>
           )}
         </div>
       </div>

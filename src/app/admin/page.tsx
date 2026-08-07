@@ -71,7 +71,7 @@ export default function AdminPage() {
       text: newText.trim(),
     };
 
-    const updated = [newEntry, ...updates];
+    const updated = [...updates, newEntry];
     saveUpdates(updated);
     setNewText("");
     setSuccessMsg("Life update published successfully!");

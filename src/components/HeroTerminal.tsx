@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { statusUpdates, type StatusUpdate } from "@/content/updates";
@@ -8,6 +8,7 @@ import { statusUpdates, type StatusUpdate } from "@/content/updates";
 export default function HeroTerminal() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [items, setItems] = useState<StatusUpdate[]>(statusUpdates);
+  const consoleRef = useRef<HTMLDivElement>(null);
 
   const loadUpdates = () => {
     const saved = localStorage.getItem("anwin_life_updates");
@@ -33,6 +34,13 @@ export default function HeroTerminal() {
     };
   }, []);
 
+  // Auto scroll console to bottom when logs update
+  useEffect(() => {
+    if (consoleRef.current) {
+      consoleRef.current.scrollTop = consoleRef.current.scrollHeight;
+    }
+  }, [items, activeFilter]);
+
   const categories = [
     { id: "all", label: "all.log" },
     { id: "Business", label: "business" },
@@ -41,10 +49,11 @@ export default function HeroTerminal() {
     { id: "Design & Tech", label: "tech" },
   ];
 
-  const filteredUpdates =
+  const filteredUpdates = (
     activeFilter === "all"
       ? items
-      : items.filter((u) => u.category === activeFilter);
+      : items.filter((u) => u.category === activeFilter)
+  ).slice().sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <div
@@ -124,7 +133,7 @@ export default function HeroTerminal() {
         </div>
 
         {/* Authentic Terminal Output Console */}
-        <div className="relative z-20 my-3 flex-1 overflow-y-auto pr-1 space-y-3.5 custom-scrollbar bg-[#06080C] rounded-2xl p-4 border border-[#141A26]">
+        <div ref={consoleRef} className="relative z-20 my-3 flex-1 overflow-y-auto pr-1 space-y-3.5 custom-scrollbar bg-[#06080C] rounded-2xl p-4 border border-[#141A26]">
           <AnimatePresence mode="popLayout">
             {filteredUpdates.map((item) => (
               <motion.div

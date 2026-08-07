@@ -1,11 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { statusUpdates } from "@/content/updates";
+import Link from "next/link";
+import { statusUpdates, type StatusUpdate } from "@/content/updates";
 
 export default function HeroTerminal() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [items, setItems] = useState<StatusUpdate[]>(statusUpdates);
+
+  const loadUpdates = () => {
+    const saved = localStorage.getItem("anwin_life_updates");
+    if (saved) {
+      try {
+        setItems(JSON.parse(saved));
+      } catch {
+        setItems(statusUpdates);
+      }
+    } else {
+      setItems(statusUpdates);
+    }
+  };
+
+  useEffect(() => {
+    loadUpdates();
+    const handleUpdate = () => loadUpdates();
+    window.addEventListener("anwin_updates_changed", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+    return () => {
+      window.removeEventListener("anwin_updates_changed", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
 
   const categories = [
     { id: "all", label: "all.log" },
@@ -17,8 +43,8 @@ export default function HeroTerminal() {
 
   const filteredUpdates =
     activeFilter === "all"
-      ? statusUpdates
-      : statusUpdates.filter((u) => u.category === activeFilter);
+      ? items
+      : items.filter((u) => u.category === activeFilter);
 
   return (
     <div
@@ -140,9 +166,14 @@ export default function HeroTerminal() {
             <span>admin_source: /src/content/updates.ts</span>
           </div>
 
-          <span className="text-[#D4521A] font-bold uppercase tracking-wider">
-            Anwin Shajan
-          </span>
+          <div className="flex items-center gap-3">
+            <Link href="/admin" className="hover:text-[#00E5A3] transition-colors font-mono">
+              [admin_panel ⚙]
+            </Link>
+            <span className="text-[#D4521A] font-bold uppercase tracking-wider">
+              Anwin Shajan
+            </span>
+          </div>
         </div>
       </div>
     </div>
